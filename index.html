@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body>
+    <div id="app">
+        <template>
+            <v-app>
+                <v-card width="400" class="mx-auto mt-10 pb-5">
+                    <v-card-title>
+                        <h2 class="display">Login</h2>
+                    </v-card-title>
+                            <v-card-text>
+                                <v-form>
+                                    <v-text-field v-model="userEmail" prepend-icon="mdi-account-circle" label="Email" />
+                                </v-form>
+
+                                <v-form>
+                                    <v-text-field 
+                                    v-model="userPassword"
+                                    type="Password"
+                                    label="Password"
+                                    prepend-icon="mdi-lock"
+                                    />
+                                </v-form>
+
+                            </v-card-text>
+                                    <v-devider></v-devider>
+                                        <v-card-action class="ml-5 mt-5">
+                                            <v-btn color="success">Register</v-btn>
+                                            <v-btn color="success" text @click="loginUser">Login</v-btn>
+                                        </v-card-action>
+                </v-card>
+            </v-app>
+        </template>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data: {
+                userEmail:'',
+                userPassword:''
+            },
+
+            create: function () {
+                this.loginUser()
+            },
+
+            methods: {
+                loginUser: function (){
+                    axios.post('https://reqres.in/api/login',{
+                        email: this.userEmail,
+                        password: this.userPassword
+                    })
+
+                    .then ((response) => {
+                        console.log(response);
+                    });
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
